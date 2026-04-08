@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/OTT-TRACKER/static/css/main.d6772e44.css",
-    "main.js": "/OTT-TRACKER/static/js/main.f6075b86.js",
+    "main.css": "/OTT-TRACKER/static/css/main.6faa3dc2.css",
+    "main.js": "/OTT-TRACKER/static/js/main.78d9d303.js",
     "index.html": "/OTT-TRACKER/index.html",
-    "main.d6772e44.css.map": "/OTT-TRACKER/static/css/main.d6772e44.css.map",
-    "main.f6075b86.js.map": "/OTT-TRACKER/static/js/main.f6075b86.js.map"
+    "main.6faa3dc2.css.map": "/OTT-TRACKER/static/css/main.6faa3dc2.css.map",
+    "main.78d9d303.js.map": "/OTT-TRACKER/static/js/main.78d9d303.js.map"
   },
   "entrypoints": [
-    "static/css/main.d6772e44.css",
-    "static/js/main.f6075b86.js"
+    "static/css/main.6faa3dc2.css",
+    "static/js/main.78d9d303.js"
   ]
 }
