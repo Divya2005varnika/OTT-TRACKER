@@ -1,5 +1,5 @@
 import React, { useReducer, useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
 import "./styles.css";
 import { INITIAL_SHOWS, CATEGORIES } from "./data/constants";
 import { reducer, initialState } from "./reducer/reducer";
@@ -18,7 +18,6 @@ function AppContent() {
   const location = useLocation();
 
   // --- AUTHENTICATION LOCK ---
-  // This ensures the app always starts at the login screen
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -69,8 +68,8 @@ function AppContent() {
           <input type="text" placeholder="Email or Username" />
           <input type="password" placeholder="Password" />
           <button className="btn-login" onClick={() => {
-            setIsAuthenticated(true); // Unlocks the app
-            navigate("/");            // Sends you to the Dashboard
+            setIsAuthenticated(true);
+            navigate("/");            
           }}>
             Sign In
           </button>
@@ -80,7 +79,7 @@ function AppContent() {
   }
 
   // ==========================================
-  // ✅ MAIN APP (ONLY SHOWS IF LOGGED IN)
+  // ✅ MAIN APP 
   // ==========================================
   return (
     <div className="app-container">
@@ -166,10 +165,9 @@ function AppContent() {
                   <span className="pro-badge">⭐ PRO MEMBER</span>
                   <p className="profile-email">admin@otttrack.com</p>
                   
-                  {/* Sign Out Button now specifically locks the app and sends you home */}
                   <button className="btn-login" style={{marginTop:'30px', background:'#334155'}} onClick={() => { 
-                    setIsAuthenticated(false); // Locks the app
-                    navigate("/");             // Triggers the login screen
+                    setIsAuthenticated(false); 
+                    navigate("/");             
                   }}>
                     Sign Out
                   </button>
