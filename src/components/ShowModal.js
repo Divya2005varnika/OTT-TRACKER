@@ -1,33 +1,37 @@
 import React, { useState } from "react";
-import { CATEGORIES, STATUS } from "../data/constants";
+import { STATUS, CATEGORIES } from "../data/constants";
 
 export default function ShowModal({ onSave, onClose }) {
   const [form, setForm] = useState({
-    title: "", category: "Tamil", status: "Plan to Watch", 
-    genre: "Action", year: 2024, rating: 10, poster: "🎬", link: "", cast: "", watched: 0, episodes: 1
+    title: "", 
+    year: 2024, 
+    rating: 5, 
+    status: "Plan to Watch", 
+    category: "Tamil",
+    poster: "🎬"
   });
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-card">
-        <h2 style={{margin:0, color:'var(--primary)'}}>Add New Show</h2>
-        <input placeholder="Movie Name" required onChange={e => setForm({...form, title: e.target.value})} />
-        <input placeholder="Cast Members" onChange={e => setForm({...form, cast: e.target.value})} />
-        <input placeholder="IMDb Website Link" onChange={e => setForm({...form, link: e.target.value})} />
+    <div className="overlay">
+      <div className="modal-box">
+        <h2>Add Movie</h2>
         
-        <div style={{display:'flex', gap:'10px'}}>
-          <select onChange={e => setForm({...form, category: e.target.value})}>
-            {CATEGORIES.slice(1).map(c => <option key={c} value={c}>{c}</option>)}
-          </select>
-          <select value={form.status} onChange={e => setForm({...form, status: e.target.value})}>
-            {STATUS.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
-        </div>
+        <label>Movie Name:</label>
+        <input type="text" onChange={(e) => setForm({ ...form, title: e.target.value })} />
 
-        <div style={{display:'flex', gap:'10px', marginTop:'15px'}}>
-          <button className="btn-login" style={{background:'#334155'}} onClick={onClose}>Cancel</button>
-          <button className="btn-login" onClick={() => onSave(form)}>Save Show</button>
-        </div>
+        <label>Category:</label>
+        <select onChange={(e) => setForm({ ...form, category: e.target.value })}>
+          {CATEGORIES.slice(1).map(c => <option key={c} value={c}>{c}</option>)}
+        </select>
+
+        <label>Status:</label>
+        <select onChange={(e) => setForm({ ...form, status: e.target.value })}>
+          {STATUS.map(s => <option key={s} value={s}>{s}</option>)}
+        </select>
+
+        <br />
+        <button onClick={() => onSave(form)} style={{ background: 'green', color: 'white', padding: '10px', marginRight: '10px' }}>Save</button>
+        <button onClick={onClose} style={{ background: 'red', color: 'white', padding: '10px' }}>Cancel</button>
       </div>
     </div>
   );
