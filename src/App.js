@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./styles.css";
 import { INITIAL_SHOWS, CATEGORIES } from "./data/constants";
@@ -22,6 +22,13 @@ function AppContent() {
   });
 
   const totalWatched = shows.filter(s => s.status === "Completed").length;
+
+  // --- NEW CODE: useEffect Hook ---
+  // This updates the actual browser tab title whenever the 'shows' array changes
+  useEffect(() => {
+    document.title = `OTT Tracker (${shows.length} movies)`;
+  }, [shows]);
+  // --------------------------------
 
   const handleAddMovie = (newMovie) => {
     const movieWithId = { ...newMovie, id: Date.now() };
@@ -56,14 +63,12 @@ function AppContent() {
 
       <div className="main-content">
         <Routes>
-          {/* HOME PAGE WITH 6 MOVIES */}
           <Route path="/" element={
             <div>
               <h1>Welcome Home</h1>
               
               <h3>Featured Movies</h3>
               <div className="grid">
-                {/* This slices exactly 6 movies to show on the home page */}
                 {shows.slice(0, 6).map(s => (
                   <ShowCard key={s.id} show={s} onClick={() => setSelectedMovie(s)} />
                 ))}
