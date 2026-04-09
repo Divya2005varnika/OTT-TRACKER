@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://Divya2005varnika.github.io/OTT-TRACKER",
   "dependencies": {
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.0.0",

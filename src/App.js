@@ -23,12 +23,9 @@ function AppContent() {
 
   const totalWatched = shows.filter(s => s.status === "Completed").length;
 
-  // --- NEW CODE: useEffect Hook ---
-  // This updates the actual browser tab title whenever the 'shows' array changes
   useEffect(() => {
     document.title = `OTT Tracker (${shows.length} movies)`;
   }, [shows]);
-  // --------------------------------
 
   const handleAddMovie = (newMovie) => {
     const movieWithId = { ...newMovie, id: Date.now() };

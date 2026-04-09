@@ -3,21 +3,27 @@ import { STATUS, CATEGORIES } from "../data/constants";
 
 export default function ShowModal({ onSave, onClose }) {
   const [form, setForm] = useState({
-    title: "", 
-    year: 2024, 
-    rating: 5, 
-    status: "Plan to Watch", 
+    title: "",
+    year: 2024,
+    rating: 5,
+    status: "Plan to Watch",
     category: "Tamil",
-    poster: "🎬"
+    poster: " 🎬 "
   });
 
   return (
     <div className="overlay">
       <div className="modal-box">
         <h2>Add Movie</h2>
-        
+
         <label>Movie Name:</label>
         <input type="text" onChange={(e) => setForm({ ...form, title: e.target.value })} />
+
+        <label>Release Year:</label>
+        <input type="number" value={form.year} onChange={(e) => setForm({ ...form, year: parseInt(e.target.value) })} />
+
+        <label>Rating (1-10):</label>
+        <input type="number" min="1" max="10" value={form.rating} onChange={(e) => setForm({ ...form, rating: parseInt(e.target.value) })} />
 
         <label>Category:</label>
         <select onChange={(e) => setForm({ ...form, category: e.target.value })}>
@@ -28,7 +34,7 @@ export default function ShowModal({ onSave, onClose }) {
         <select onChange={(e) => setForm({ ...form, status: e.target.value })}>
           {STATUS.map(s => <option key={s} value={s}>{s}</option>)}
         </select>
-
+        
         <br />
         <button onClick={() => onSave(form)} style={{ background: 'green', color: 'white', padding: '10px', marginRight: '10px' }}>Save</button>
         <button onClick={onClose} style={{ background: 'red', color: 'white', padding: '10px' }}>Cancel</button>
