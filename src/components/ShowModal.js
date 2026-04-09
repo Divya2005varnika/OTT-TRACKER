@@ -8,8 +8,8 @@ export default function ShowModal({ onSave, onClose }) {
     rating: 5,
     status: "Plan to Watch",
     category: "Tamil",
-    genre: "Action",     // Added missing field [cite: 25]
-    platform: "Netflix", // Added missing field [cite: 26]
+    genre: "Action",     
+    platform: "Netflix", 
     poster: "🎬"
   });
 

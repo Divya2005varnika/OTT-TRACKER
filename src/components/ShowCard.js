@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 export default class ShowCard extends Component {
   constructor(props) {
     super(props);
-    // Component API requirement: initializing state
     this.state = { isHovered: false };
   }
 
@@ -30,7 +29,6 @@ export default class ShowCard extends Component {
   }
 }
 
-// Official Props Validation using the prop-types library
 ShowCard.propTypes = {
   show: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,

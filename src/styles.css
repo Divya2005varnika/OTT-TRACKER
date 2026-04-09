@@ -1,3 +1,4 @@
+
 :root {
   --bg-dark: #0a0e14;
   --card-bg: #1c2533;
@@ -6,16 +7,21 @@
   --text-gray: #a0a0a0;
 }
 
-body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); color: var(--text-white); margin: 0; }
+body { 
+  font-family: 'Segoe UI', sans-serif; 
+  background-color: var(--bg-dark); 
+  color: var(--text-white); 
+  margin: 0; 
+}
 
-/* Login Screen */
+
 .login-screen { display: flex; justify-content: center; align-items: center; height: 100vh; }
 .simple-login { background: var(--card-bg); padding: 40px; border-radius: 15px; border: 1px solid #333; width: 320px; text-align: center; }
 .login-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
 .login-form input { padding: 12px; background: #0d1117; color: white; border: 1px solid #444; border-radius: 8px; }
 .login-form button { padding: 12px; background: var(--accent); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
 
-/* Navigation */
+
 .simple-nav { 
   background-color: #0d1117; padding: 1.2rem 5%; display: flex; justify-content: space-between; 
   align-items: center; border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 100;
@@ -23,17 +29,30 @@ body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); co
 .logo { color: var(--accent); margin: 0; }
 .nav-links a { color: var(--text-gray); text-decoration: none; margin-left: 20px; font-weight: 500; }
 
-/* Tracker Page Layout */
+
 .tracker-page { padding: 40px 0; }
 .tracker-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding: 0 5%; }
-.filters-group { display: flex; gap: 15px; }
-.filters-group input, .filters-group select { background: #1c2533; color: white; border: 1px solid #333; padding: 12px 20px; border-radius: 8px; min-width: 180px; }
+
+.filters-group { 
+  display: flex; 
+  gap: 15px; 
+}
+
+.filters-group input, 
+.filters-group select { 
+  background: #1c2533; 
+  color: white; 
+  border: 1px solid #333; 
+  padding: 12px 15px; 
+  border-radius: 8px; 
+  min-width: 140px; 
+}
 
 .actions-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 0 5%; }
 .add-btn-premium { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 .results-count { color: var(--accent); font-weight: bold; }
 
-/* Profile Page */
+
 .profile-page { padding: 20px 0; }
 .profile-container { display: flex; gap: 40px; margin-top: 30px; flex-wrap: wrap; }
 .user-sidebar { background: var(--card-bg); padding: 40px; border-radius: 20px; width: 280px; text-align: center; }
@@ -41,8 +60,9 @@ body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); co
 .pro-badge { background: #ffcc00; color: #000; font-weight: bold; font-size: 0.7rem; padding: 4px 12px; border-radius: 20px; margin: 10px 0; display: inline-block; }
 .signout-btn { width: 100%; background: #2b3a4f; color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; }
 
-/* Grid & Cards */
 .section-title { font-size: 1.5rem; font-weight: bold; margin: 0; }
+
+
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; padding: 10px 5% 40px 5%; }
 .movie-card { background: var(--card-bg); border-radius: 18px; overflow: hidden; position: relative; cursor: pointer; transition: 0.3s; }
 .card-media { background: linear-gradient(180deg, #2b3a4f 0%, #1c2533 100%); height: 180px; display: flex; align-items: center; justify-content: center; position: relative; }
@@ -53,7 +73,7 @@ body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); co
 .meta-text { color: var(--text-gray); font-size: 0.8rem; margin: 4px 0 12px 0; }
 .rating-row { color: #ffcc00; font-weight: bold; font-size: 0.95rem; }
 
-/* Stats */
+
 .stats-main { flex: 1; min-width: 350px; }
 .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; }
 .stat-card { background: var(--card-bg); padding: 25px; border-radius: 15px; text-align: center; }
@@ -61,7 +81,7 @@ body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); co
 .stat-desc { color: var(--text-gray); font-size: 0.8rem; }
 .stat-card.highlight { border: 1px solid var(--accent); }
 
-/* Modals */
+
 .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(5px); }
 .modal-box { background: var(--card-bg); padding: 30px; border-radius: 18px; border: 1px solid var(--accent); width: 400px; }
 .form-content { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; text-align: left; }

@@ -7,7 +7,6 @@ import DetailsPage from "./components/DetailsPage";
 import ShowModal from "./components/ShowModal";
 
 function AppContent() {
-  // PERSISTENCE: Load from localStorage or use INITIAL_SHOWS if empty [cite: 115]
   const [shows, setShows] = useState(() => {
     const savedData = localStorage.getItem("ott_tracker_data");
     return savedData ? JSON.parse(savedData) : INITIAL_SHOWS;
@@ -18,18 +17,29 @@ function AppContent() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Languages");
+  const [sortBy, setSortBy] = useState("az"); 
 
-  // PERSISTENCE: Save to localStorage whenever the 'shows' state changes [cite: 127-129]
   useEffect(() => {
     localStorage.setItem("ott_tracker_data", JSON.stringify(shows));
     document.title = `OTT Tracker | ${shows.length} Titles`;
   }, [shows]);
 
-  const filteredShows = shows.filter((movie) => {
-    const matchesSearch = movie.title.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === "All Languages" || movie.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const getProcessedShows = () => {
+    return shows
+      .filter((movie) => {
+        const matchesSearch = movie.title.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesCategory = selectedCategory === "All Languages" || movie.category === selectedCategory;
+        return matchesSearch && matchesCategory;
+      })
+      .sort((a, b) => {
+        if (sortBy === "az") return a.title.localeCompare(b.title);
+        if (sortBy === "year") return b.year - a.year; // Descending Year
+        if (sortBy === "rating") return b.rating - a.rating; // Descending Rating
+        return 0;
+      });
+  };
+
+  const filteredShows = getProcessedShows();
 
   const handleDelete = (id, e) => {
     e.stopPropagation(); 
@@ -37,7 +47,7 @@ function AppContent() {
   };
 
   const handleAddMovie = (newMovie) => {
-    setShows([...shows, { ...newMovie, id: Date.now() }]);
+    setShows([{ ...newMovie, id: Date.now() }, ...shows]);
     setShowAddForm(false);
   };
 
@@ -84,7 +94,8 @@ function AppContent() {
               </div>
               <h2 className="section-title" style={{padding: '40px 5% 0'}}>Recently Added</h2>
               <div className="grid">
-                {[...shows].reverse().slice(0, 4).map(s => (
+                {/* Fixed the reverse logic to avoid mutating state  */}
+                {shows.slice(0, 4).map(s => (
                   <ShowCard key={s.id} show={s} onClick={() => setSelectedMovie(s)} onDelete={(e) => handleDelete(s.id, e)} />
                 ))}
               </div>
@@ -96,9 +107,14 @@ function AppContent() {
               <div className="tracker-header">
                 <h1 className="section-title">Movie List</h1>
                 <div className="filters-group">
-                  <input type="text" placeholder="Search for movies..." onChange={(e) => setSearchQuery(e.target.value)} />
+                  <input type="text" placeholder="Search..." onChange={(e) => setSearchQuery(e.target.value)} />
                   <select onChange={(e) => setSelectedCategory(e.target.value)}>
                     {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                  <select onChange={(e) => setSortBy(e.target.value)}>
+                    <option value="az">Sort: A-Z</option>
+                    <option value="year">Sort: Year</option>
+                    <option value="rating">Sort: Rating</option>
                   </select>
                 </div>
               </div>
@@ -142,8 +158,8 @@ function AppContent() {
                   <h3 className="stats-label">VIEWING STATISTICS</h3>
                   <div className="stats-row">
                     <div className="stat-card">
-                      <span className="stat-value">{shows.length * 2}</span>
-                      <span className="stat-desc">Episodes</span>
+                      <span className="stat-value">{shows.length}</span>
+                      <span className="stat-desc">Titles</span>
                     </div>
                     <div className="stat-card">
                       <span className="stat-value">{shows.filter(s => s.status === "Completed").length}</span>
