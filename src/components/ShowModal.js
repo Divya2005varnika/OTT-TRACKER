@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { STATUS, CATEGORIES } from "../data/constants";
+import { STATUS, CATEGORIES, PLATFORMS } from "../data/constants";
 
 export default function ShowModal({ onSave, onClose }) {
   const [form, setForm] = useState({
@@ -8,36 +8,64 @@ export default function ShowModal({ onSave, onClose }) {
     rating: 5,
     status: "Plan to Watch",
     category: "Tamil",
-    poster: " 🎬 "
+    genre: "Action",     // Added missing field [cite: 25]
+    platform: "Netflix", // Added missing field [cite: 26]
+    poster: "🎬"
   });
 
   return (
     <div className="overlay">
       <div className="modal-box">
         <h2>Add Movie</h2>
+        <div className="form-content">
+          <div className="form-group">
+            <label>Movie Name:</label>
+            <input type="text" placeholder="Enter title" onChange={(e) => setForm({ ...form, title: e.target.value })} />
+          </div>
 
-        <label>Movie Name:</label>
-        <input type="text" onChange={(e) => setForm({ ...form, title: e.target.value })} />
+          <div className="form-row">
+            <div className="form-group">
+              <label>Genre:</label>
+              <input type="text" placeholder="e.g. Action" onChange={(e) => setForm({ ...form, genre: e.target.value })} />
+            </div>
+            <div className="form-group">
+              <label>Platform:</label>
+              <select onChange={(e) => setForm({ ...form, platform: e.target.value })}>
+                {PLATFORMS.map(p => <option key={p} value={p}>{p}</option>)}
+              </select>
+            </div>
+          </div>
 
-        <label>Release Year:</label>
-        <input type="number" value={form.year} onChange={(e) => setForm({ ...form, year: parseInt(e.target.value) })} />
+          <div className="form-row">
+            <div className="form-group">
+              <label>Release Year:</label>
+              <input type="number" value={form.year} onChange={(e) => setForm({ ...form, year: parseInt(e.target.value) })} />
+            </div>
+            <div className="form-group">
+              <label>Rating (1-10):</label>
+              <input type="number" min="1" max="10" value={form.rating} onChange={(e) => setForm({ ...form, rating: parseInt(e.target.value) })} />
+            </div>
+          </div>
 
-        <label>Rating (1-10):</label>
-        <input type="number" min="1" max="10" value={form.rating} onChange={(e) => setForm({ ...form, rating: parseInt(e.target.value) })} />
+          <div className="form-group">
+            <label>Category:</label>
+            <select onChange={(e) => setForm({ ...form, category: e.target.value })}>
+              {CATEGORIES.slice(1).map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+          </div>
 
-        <label>Category:</label>
-        <select onChange={(e) => setForm({ ...form, category: e.target.value })}>
-          {CATEGORIES.slice(1).map(c => <option key={c} value={c}>{c}</option>)}
-        </select>
+          <div className="form-group">
+            <label>Status:</label>
+            <select onChange={(e) => setForm({ ...form, status: e.target.value })}>
+              {STATUS.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
 
-        <label>Status:</label>
-        <select onChange={(e) => setForm({ ...form, status: e.target.value })}>
-          {STATUS.map(s => <option key={s} value={s}>{s}</option>)}
-        </select>
-        
-        <br />
-        <button onClick={() => onSave(form)} style={{ background: 'green', color: 'white', padding: '10px', marginRight: '10px' }}>Save</button>
-        <button onClick={onClose} style={{ background: 'red', color: 'white', padding: '10px' }}>Cancel</button>
+          <div className="modal-actions">
+            <button className="save-btn" onClick={() => onSave(form)}>Save Movie</button>
+            <button className="cancel-btn" onClick={onClose}>Cancel</button>
+          </div>
+        </div>
       </div>
     </div>
   );
